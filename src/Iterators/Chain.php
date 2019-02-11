@@ -2,9 +2,9 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class Chain extends Iterator
+final class Chain extends IteratorIterator
 {
 
     public function __construct(\Iterator $from, \Iterator $chain)

@@ -2,9 +2,9 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class TakeWhile extends Iterator
+final class TakeWhile extends IteratorIterator
 {
     protected $takeWhileFn;
 

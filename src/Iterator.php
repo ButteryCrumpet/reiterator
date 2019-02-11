@@ -26,73 +26,32 @@ use ReIterator\Iterators\Zip;
  * Class Iterator
  * @package ReIterator
  */
-class Iterator implements IteratorInterface
+abstract class Iterator implements IteratorInterface
 {
     /**
-     * @var \Iterator
+     * {@inheritdoc}
      */
-    protected $from;
-
-    /**
-     * Creates a ReIterator\Iterator from an array
-     *
-     * @param array $array
-     * @return Iterator
-     */
-    public static function fromArray(array $array)
-    {
-        return new Iterator(new \ArrayIterator($array));
-    }
-
-    /**
-     * Constructor for ReIterator\Iterator
-     *
-     * @param \Iterator $from
-     */
-    public function __construct(\Iterator $from)
-    {
-        $this->from = $from;
-    }
+    abstract public function current();
 
     /**
      * {@inheritdoc}
      */
-    public function current()
-    {
-        return $this->from->current();
-    }
+    abstract public function next();
 
     /**
      * {@inheritdoc}
      */
-    public function next()
-    {
-        $this->from->next();
-    }
+    abstract public function key();
 
     /**
      * {@inheritdoc}
      */
-    public function key()
-    {
-        return $this->from->key();
-    }
+    abstract public function valid();
 
     /**
      * {@inheritdoc}
      */
-    public function valid()
-    {
-        return $this->from->valid();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rewind()
-    {
-        $this->from->rewind();
-    }
+    abstract public function rewind();
 
     /**
      * @{@inheritdoc}

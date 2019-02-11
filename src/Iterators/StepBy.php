@@ -2,12 +2,11 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class StepBy extends Iterator
+final class StepBy extends IteratorIterator
 {
     protected $step;
-    protected $index = 0;
 
     public function __construct(\Iterator $from, $step)
     {
@@ -20,12 +19,5 @@ final class StepBy extends Iterator
         for ($i = 0; $i < $this->step; $i++) {
             $this->from->next();
         }
-        $this->index = $this->index + 1;
-    }
-
-    public function key()
-    {
-        $key = $this->from->key();
-        return is_integer($key) ? $this->index : $key;
     }
 }

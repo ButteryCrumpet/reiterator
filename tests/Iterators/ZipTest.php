@@ -27,8 +27,9 @@ class ZipTest extends TestCase
 
         $instance = new Zip($iter2, $iter1);
         $this->assertEquals(
-            [['he', 'hi'], [null, 'ho']],
-            $instance->collect()
+            [['he', 'hi']],
+            $instance->collect(),
+            "Stops iteration when first iterator ends"
         );
     }
 }

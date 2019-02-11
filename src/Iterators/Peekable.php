@@ -2,10 +2,10 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 use ReIterator\PeekableIteratorInterface;
 
-final class Peekable extends Iterator implements PeekableIteratorInterface
+final class Peekable extends IteratorIterator implements PeekableIteratorInterface
 {
     protected $window = [null, null];
     protected $end = false;

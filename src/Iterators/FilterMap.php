@@ -2,9 +2,9 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class FilterMap extends Iterator
+final class FilterMap extends IteratorIterator
 {
     public function __construct(\Iterator $from, \Closure $fn)
     {

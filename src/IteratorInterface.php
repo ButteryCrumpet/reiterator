@@ -47,9 +47,8 @@ interface IteratorInterface extends \Iterator, \Countable
 
     /**
      * Returns a new iterator that zips up two iterators.
-     * Runs the full length of the longest iterator, filling
-     * null if the other iterator has ended
-     * TODO: Stop iteration on first iterator ending
+     * Stops iteration when the first Iterator ends, so
+     * ignores any extra values in the second iterator.
      *
      * @param \Iterator $iterator
      * @return IteratorInterface

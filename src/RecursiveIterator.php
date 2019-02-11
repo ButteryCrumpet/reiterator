@@ -3,7 +3,7 @@
 namespace ReIterator;
 
 
-class RecursiveIteratorWrapper extends Iterator implements \RecursiveIterator
+class RecursiveIterator extends IteratorIterator implements \RecursiveIterator
 {
     /**
      * @return \RecursiveIterator
@@ -23,7 +23,7 @@ class RecursiveIteratorWrapper extends Iterator implements \RecursiveIterator
 
         if ($current instanceof \Iterator)
         {
-            return new RecursiveIteratorWrapper($current);
+            return new RecursiveIterator($current);
         }
 
         return new \RecursiveArrayIterator([$current]);

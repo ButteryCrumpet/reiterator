@@ -2,23 +2,16 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class SkipWhile extends Iterator
+final class SkipWhile extends IteratorIterator
 {
     protected $skipFn;
-    protected $index = 0;
 
     public function __construct(\Iterator $from, \Closure $skip)
     {
         parent::__construct($from);
         $this->skipFn = $skip;
-    }
-
-    public function next()
-    {
-        parent::next();
-        $this->index = $this->index + 1;
     }
 
     public function current()
@@ -28,11 +21,5 @@ final class SkipWhile extends Iterator
             parent::next();
         }
         return parent::current();
-    }
-
-    public function key()
-    {
-        $key = $this->from->key();
-        return is_integer($key) ? $this->index : $key;
     }
 }

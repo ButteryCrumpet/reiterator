@@ -2,9 +2,9 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class Map extends Iterator
+final class Map extends IteratorIterator
 {
     protected $mapFn;
 

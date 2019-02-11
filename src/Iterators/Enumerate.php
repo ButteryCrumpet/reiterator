@@ -2,9 +2,9 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class Enumerate extends Iterator
+final class Enumerate extends IteratorIterator
 {
     protected $index = 0;
 

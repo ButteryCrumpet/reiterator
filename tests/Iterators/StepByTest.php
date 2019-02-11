@@ -22,11 +22,11 @@ class StepByTest extends TestCase
 
     public function testNext()
     {
-        $iter = new ArrayIterator(["hi", "hy", "he", "ho", "ha" => "hu"]);
+        $iter = new ArrayIterator(["hi", "hy", "he", "ho", "hu"]);
         $instance = new StepBy($iter, 2);
 
         $this->assertEquals(
-            ["hi", "he", "ha" => "hu"],
+            ["hi", "he", "hu"],
             $instance->collect()
         );
     }

@@ -2,9 +2,9 @@
 
 namespace ReIterator\Iterators;
 
-use ReIterator\Iterator;
+use ReIterator\IteratorIterator;
 
-final class ForEachIter extends Iterator
+final class ForEachIter extends IteratorIterator
 {
     protected $feFn;
 
