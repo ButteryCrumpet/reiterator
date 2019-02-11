@@ -1,0 +1,21 @@
+{
+    "name": "butterycrumpet/reiterator",
+    "type": "library",
+    "description": "Rust inspired iterator library",
+    "keywords": ["iterators", "rust", "iterator", "map", "filter"],
+    "license": "MIT",
+    "authors": [{
+        "name": "PPBuilds",
+        "email": "sleigh@produce-pro.co.jp"
+    }],
+
+    "autoload": {
+        "psr-4": {
+            "ReIterator\\": "src"
+        }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.11.1",
+        "phpunit/phpunit": "^8.0"
+    }
+}
