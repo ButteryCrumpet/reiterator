@@ -2,7 +2,6 @@
 
 namespace ReIterator;
 
-
 use ReIterator\Exceptions\ClassNotFoundException;
 use ReIterator\Iterators\Chain;
 use ReIterator\Iterators\Enumerate;
@@ -13,6 +12,7 @@ use ReIterator\Iterators\Flatten;
 use ReIterator\Iterators\ForEachIter;
 use ReIterator\Iterators\Map;
 use ReIterator\Iterators\Peekable;
+use ReIterator\Iterators\Reverse;
 use ReIterator\Iterators\Skip;
 use ReIterator\Iterators\SkipWhile;
 use ReIterator\Iterators\StepBy;
@@ -86,10 +86,12 @@ abstract class Iterator implements IteratorInterface
     public function last()
     {
         $this->rewind();
+        $value = null;
         while ($this->valid()) {
+            $value = $this->current();
             $this->next();
         }
-        return $this->current();
+        return $value;
     }
 
     /**
@@ -98,8 +100,8 @@ abstract class Iterator implements IteratorInterface
     public function nth($n)
     {
         $this->rewind();
-        $count = 0;
-        while ($count !== $n && $this->valid()) {
+        $count = 1;
+        while ($count < $n && $this->valid()) {
             $count = $count + 1;
             $this->next();
         }
@@ -219,14 +221,6 @@ abstract class Iterator implements IteratorInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function reverse()
-    {
-        // TODO: Implement reverse() method.
-    }
-
-    /**
      *{@inheritdoc}
      */
     public function peekable()
@@ -253,16 +247,30 @@ abstract class Iterator implements IteratorInterface
      */
     public function into($type)
     {
-       if (!class_exists($type))
+
+        if (is_string($type)) {
+
+            if (!class_exists($type))
+            {
+                throw new ClassNotFoundException("Class $type could not be found");
+            }
+
+            if (is_subclass_of($type, FromIter::class)) {
+                return $type::FromIter($this);
+            }
+
+            $type = new $type();
+        }
+
+       if ($type instanceof \ArrayAccess)
        {
-           throw new ClassNotFoundException("Class $type could not be found");
+            foreach ($this as $value) {
+                $type[] = $value;
+            }
+            return $type;
        }
 
-       $into = new $type;
+       throw new \InvalidArgumentException("Type must be");
 
-       if (!($into instanceof \ArrayAccess))
-       {
-
-       }
     }
 }

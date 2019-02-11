@@ -168,9 +168,13 @@ interface IteratorInterface extends \Iterator, \Countable
     public function collect();
 
     /**
-     * Collects the iterator into an array
+     * Collects the iterator into an passed in type.
+     * Accepts either an instance of \ArrayAccess, a string
+     * classname that instantiates to \ArrayAccess or a string
+     * classname that implements FromIter and will be statically
+     * called
      *
-     * @param string $type
+     * @param string|\ArrayAccess $type
      * @return mixed
      */
     public function into($type);
@@ -196,10 +200,5 @@ interface IteratorInterface extends \Iterator, \Countable
      * @return PeekableIteratorInterface
      */
     public function peekable();
-
-    /**
-     * @return mixed
-     */
-    public function reverse();
 
 }

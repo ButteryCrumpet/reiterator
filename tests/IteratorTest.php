@@ -6,10 +6,75 @@ use PHPUnit\Framework\TestCase;
 class IteratorTest extends TestCase
 {
     private $mock;
+    private $arr;
 
     public function setUp(): void
     {
+        $this->arr = [1, 2, 3];
+        \reset($this->arr);
         $this->mock = $this->getMockForAbstractClass(Iterator::class);
+        $this->mock->method("current")->willReturnCallback(function () {
+            return \current($this->arr);
+        });
+        $this->mock->method("next")->willReturnCallback(function () {
+            \next($this->arr);
+        });
+        $this->mock->method("key")->willReturnCallback(function () {
+            return \key($this->arr);
+        });
+        $this->mock->method("valid")->willReturnCallback(function () {
+            return \key($this->arr) !== null;
+        });
+        $this->mock->method("rewind")->willReturnCallback(function () {
+            \reset($this->arr);
+        });
+    }
+
+    public function testCollect()
+    {
+        $this->assertEquals(
+            $this->arr,
+            $this->mock->collect()
+        );
+    }
+
+    public function testInto()
+    {
+        $aa = $this->createMock(\ArrayAccess::class);
+        $aa->expects($this->exactly(3))
+            ->method("offsetSet")
+            ->will($this->onConsecutiveCalls(1, 2, 3));
+
+        $this->mock->into($aa);
+
+        $this->assertEquals(
+            $this->arr,
+            $this->mock->into(TestInto::class)
+        );
+
+    }
+
+    public function testNth()
+    {
+        $this->assertEquals(2, $this->mock->nth(2));
+    }
+
+    public function testLast()
+    {
+        $this->assertEquals(3, $this->mock->last());
+    }
+
+    public function testCount()
+    {
+        $this->assertEquals(3, count($this->mock));
+    }
+
+    public function testFold()
+    {
+        $this->assertEquals(
+            6,
+            $this->mock->fold(function($acc, $v) { return $acc + $v; }, 0)
+        );
     }
 
     public function testStep_by()
@@ -68,11 +133,6 @@ class IteratorTest extends TestCase
         );
     }
 
-    public function testReverse()
-    {
-        //TODO: implement reverse
-    }
-
     public function testFor_each()
     {
         $this->assertInstanceOf(
@@ -81,22 +141,12 @@ class IteratorTest extends TestCase
         );
     }
 
-    public function testCount()
-    {
-
-    }
-
     public function testSkip()
     {
         $this->assertInstanceOf(
             \ReIterator\IteratorInterface::class,
             $this->mock->skip(5)
         );
-    }
-
-    public function testNth()
-    {
-
     }
 
     public function testEnumerate()
@@ -113,16 +163,6 @@ class IteratorTest extends TestCase
             \ReIterator\IteratorInterface::class,
             $this->mock->flatten()
         );
-    }
-
-    public function testLast()
-    {
-
-    }
-
-    public function testFold()
-    {
-
     }
 
     public function testFilter_map()
@@ -155,5 +195,13 @@ class IteratorTest extends TestCase
             \ReIterator\IteratorInterface::class,
             $this->mock->peekable()
         );
+    }
+}
+
+class TestInto implements \ReIterator\FromIter
+{
+    public static function FromIter(\ReIterator\IteratorInterface $iter)
+    {
+        return $iter->collect();
     }
 }

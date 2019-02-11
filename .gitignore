@@ -2,3 +2,5 @@ vendor/*
 .idea/*
 .git/*
 cov/*
+
+.phpunit.result.cache

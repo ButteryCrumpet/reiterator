@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: apple
- * Date: 2019-02-08
- * Time: 14:48
- */
 
 use ReIterator\Iterators\FilterMap;
 use PHPUnit\Framework\TestCase;

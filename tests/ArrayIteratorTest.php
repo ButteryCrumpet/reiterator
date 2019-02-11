@@ -14,7 +14,7 @@ class ArrayIteratorTest extends TestCase
         );
     }
 
-    public function collect()
+    public function testCollect()
     {
         $testArr = [1, 2, 3];
         $instance = new ArrayIterator($testArr);
