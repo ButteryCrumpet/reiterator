@@ -133,6 +133,14 @@ class IteratorTest extends TestCase
         );
     }
 
+    public function testZipKeys()
+    {
+        $this->assertInstanceOf(
+            \ReIterator\IteratorInterface::class,
+            $this->mock->zip_keys(new ArrayIterator(["hi"]))
+        );
+    }
+
     public function testFor_each()
     {
         $this->assertInstanceOf(

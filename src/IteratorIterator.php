@@ -5,19 +5,20 @@ namespace ReIterator;
 
 class IteratorIterator extends Iterator
 {
+    protected $_iter = 0;
     /**
      * @var \Iterator
      */
-    protected $from;
+    protected $inner;
 
     /**
      * Constructor for ReIterator\Iterator
      *
-     * @param \Iterator $from
+     * @param \Iterator $inner
      */
-    public function __construct(\Iterator $from)
+    public function __construct(\Iterator $inner)
     {
-        $this->from = $from;
+        $this->inner = $inner;
     }
 
     /**
@@ -25,7 +26,7 @@ class IteratorIterator extends Iterator
      */
     public function current()
     {
-        return $this->from->current();
+        return $this->inner->current();
     }
 
     /**
@@ -33,7 +34,8 @@ class IteratorIterator extends Iterator
      */
     public function next()
     {
-        $this->from->next();
+        $this->inner->next();
+        $this->_iter = $this->_iter + 1;
     }
 
     /**
@@ -41,7 +43,7 @@ class IteratorIterator extends Iterator
      */
     public function key()
     {
-        return $this->from->key();
+        return $this->inner->key();
     }
 
     /**
@@ -49,7 +51,7 @@ class IteratorIterator extends Iterator
      */
     public function valid()
     {
-        return $this->from->valid();
+        return $this->inner->valid();
     }
 
     /**
@@ -57,6 +59,6 @@ class IteratorIterator extends Iterator
      */
     public function rewind()
     {
-        $this->from->rewind();
+        $this->inner->rewind();
     }
 }

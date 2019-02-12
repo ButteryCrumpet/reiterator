@@ -56,6 +56,15 @@ interface IteratorInterface extends \Iterator, \Countable
     public function zip(\Iterator $iterator);
 
     /**
+     * Returns a new iterator that zips together the
+     * keys and value each iterations giving a two
+     * item array [$key, $value]
+     *
+     * @return IteratorInterface
+     */
+    public function zip_keys();
+
+    /**
      * Returns a new iterator that maps the values
      * using the passed in closure
      *
@@ -161,7 +170,8 @@ interface IteratorInterface extends \Iterator, \Countable
     public function flatten();
 
     /**
-     * Collects the iterator into an array
+     * Collects the iterator into an array.
+     * Fills only values, ignoring keys.
      *
      * @return array
      */

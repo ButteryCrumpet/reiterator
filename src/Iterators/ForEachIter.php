@@ -16,7 +16,7 @@ final class ForEachIter extends IteratorIterator
 
     public function current()
     {
-        $val = $this->from->current();
+        $val = parent::current();
         call_user_func($this->feFn, $val);
         return $val;
     }

@@ -16,6 +16,6 @@ final class Map extends IteratorIterator
 
     public function current()
     {
-        return call_user_func($this->mapFn, $this->from->current());
+        return call_user_func($this->mapFn, parent::current());
     }
 }

@@ -35,7 +35,7 @@ class RecursiveIterator extends IteratorIterator implements \RecursiveIterator
     public function hasChildren()
     {
         $current = $this->current();
-        return is_array($current) || ($current instanceof \RecursiveIterator);
+        return is_array($current) || ($current instanceof \Iterator);
     }
 
 }

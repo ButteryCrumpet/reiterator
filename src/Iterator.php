@@ -12,13 +12,13 @@ use ReIterator\Iterators\Flatten;
 use ReIterator\Iterators\ForEachIter;
 use ReIterator\Iterators\Map;
 use ReIterator\Iterators\Peekable;
-use ReIterator\Iterators\Reverse;
 use ReIterator\Iterators\Skip;
 use ReIterator\Iterators\SkipWhile;
 use ReIterator\Iterators\StepBy;
 use ReIterator\Iterators\Take;
 use ReIterator\Iterators\TakeWhile;
 use ReIterator\Iterators\Zip;
+use ReIterator\Iterators\ZipKeys;
 
 /**
  * Implementation of IteratorInterface
@@ -130,6 +130,11 @@ abstract class Iterator implements IteratorInterface
     public function zip(\Iterator $iterator)
     {
         return new Zip($this, $iterator);
+    }
+
+    public function zip_keys()
+    {
+        return new ZipKeys($this);
     }
 
     /**

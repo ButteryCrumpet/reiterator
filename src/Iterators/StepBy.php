@@ -17,7 +17,7 @@ final class StepBy extends IteratorIterator
     public function next()
     {
         for ($i = 0; $i < $this->step; $i++) {
-            $this->from->next();
+            parent::next();
         }
     }
 }
