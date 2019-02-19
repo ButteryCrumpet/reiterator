@@ -85,7 +85,6 @@ abstract class Iterator implements IteratorInterface
      */
     public function last()
     {
-        $this->rewind();
         $value = null;
         while ($this->valid()) {
             $value = $this->current();
@@ -267,7 +266,7 @@ abstract class Iterator implements IteratorInterface
             $type = new $type();
         }
 
-       if ($type instanceof \ArrayAccess)
+       if ($type instanceof \ArrayAccess || $type instanceof \stdClass)
        {
             foreach ($this as $value) {
                 $type[] = $value;
@@ -275,7 +274,7 @@ abstract class Iterator implements IteratorInterface
             return $type;
        }
 
-       throw new \InvalidArgumentException("Type must be");
+       throw new \InvalidArgumentException("Type must be of string or \ArrayAccess.");
 
     }
 }

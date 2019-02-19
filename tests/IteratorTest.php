@@ -52,6 +52,12 @@ class IteratorTest extends TestCase
             $this->mock->into(TestInto::class)
         );
 
+        $this->expectException(\ReIterator\Exceptions\ClassNotFoundException::class);
+        $this->mock->into("Nothing");
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->mock->into(5);
+
     }
 
     public function testNth()

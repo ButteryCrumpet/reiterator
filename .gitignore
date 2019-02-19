@@ -4,3 +4,4 @@ vendor/*
 cov/*
 
 .phpunit.result.cache
+infection.log
